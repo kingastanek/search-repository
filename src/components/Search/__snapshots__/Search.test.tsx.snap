@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search should render correctly - with value 1`] = `ShallowWrapper {}`;
+
+exports[`Search should render correctly - without value 1`] = `ShallowWrapper {}`;
