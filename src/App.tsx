@@ -1,5 +1,7 @@
+import { RepositoriesList } from 'views';
+
 function App() {
-  return <h1>Search repository</h1>;
+  return <RepositoriesList />;
 }
 
 export default App;
