@@ -14,6 +14,7 @@ export const Title = styled.h1`
   font-weight: 500;
   text-transform: uppercase;
   color: var(--theme-grey);
+  text-align: center;
 `;
 
 export const Subtitle = styled.h4`
