@@ -4,6 +4,8 @@
     "paths": {
       "views/*": ["views/*"],
       "components/*": ["components/*"],
+      "icons/*": ["icons/*"],
+      "styles/*": ["styles/*"],
     }
   }
 }

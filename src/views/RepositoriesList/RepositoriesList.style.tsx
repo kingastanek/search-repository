@@ -13,10 +13,12 @@ export const Title = styled.h1`
   margin: 1rem 0;
   font-weight: 500;
   text-transform: uppercase;
+  color: var(--theme-grey);
 `;
 
 export const Subtitle = styled.h4`
   font-size: 1rem;
   margin: 1rem 0;
   font-weight: 500;
+  color: var(--theme-grey);
 `;
