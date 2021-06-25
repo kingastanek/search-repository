@@ -6,6 +6,10 @@
       "components/*": ["components/*"],
       "icons/*": ["icons/*"],
       "styles/*": ["styles/*"],
+      "agents/*": ["agents/*"],
+      "services/*": ["services/*"],
+      "hooks/*": ["hooks/*"],
+      "types/*": ["types/*"],
     }
   }
 }
