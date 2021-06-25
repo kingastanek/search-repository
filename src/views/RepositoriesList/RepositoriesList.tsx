@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Search, Table, Pagination } from 'components';
+import { Search, Table, Pagination, Spinner } from 'components';
 import { useFetch, useDebounce } from 'hooks';
 import repositoriesService from 'services/repositories';
 import { tableHead } from './TableConfig';
@@ -63,7 +63,7 @@ const RepositoriesList = (): JSX.Element => {
         value={searchValue}
         onChange={handleSearchChange}
       />
-      {loading && <p>Loading...</p>}
+      {loading && <Spinner />}
       <Table
         tableBodyData={data}
         tableHead={tableHead}

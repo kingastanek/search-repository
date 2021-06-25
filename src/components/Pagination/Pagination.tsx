@@ -9,11 +9,11 @@ type tPagination = {
   page?: number;
 };
 
-const Pagination: React.FC<tPagination> = ({
+const Pagination = ({
   totalRecords,
   setParams,
   page = 0,
-}): JSX.Element => {
+}: tPagination): JSX.Element => {
   const limitPerPage = 10;
   const pageCountHelper: number = Math.ceil(totalRecords / limitPerPage);
 

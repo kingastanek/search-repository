@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner should get style for fixed 1`] = `ShallowWrapper {}`;
+
+exports[`Spinner should get style for not fixed 1`] = `ShallowWrapper {}`;
+
+exports[`Spinner should render correctly 1`] = `ShallowWrapper {}`;
