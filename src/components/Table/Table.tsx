@@ -116,7 +116,7 @@ const Table = ({ tableHead, tableBodyData, setSortParams }: tTable) => {
         ) : (
           <tbody>
             <tr>
-              <NoDataTd>No results</NoDataTd>
+              <NoDataTd colSpan={tableHead.length + 1}>No results</NoDataTd>
             </tr>
           </tbody>
         )}

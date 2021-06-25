@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Search, Table } from 'components';
+import { Search, Table, Pagination } from 'components';
 import { useFetch, useDebounce } from 'hooks';
 import repositoriesService from 'services/repositories';
 import { tableHead } from './TableConfig';
@@ -45,6 +45,13 @@ const RepositoriesList = (): JSX.Element => {
     setSortParams({ field, order });
   };
 
+  const setRequestParams = useCallback(
+    (newPage: number) => {
+      if (newPage !== page) setPage(newPage);
+    },
+    [page]
+  );
+
   return (
     <Wrapper>
       <Title>Repository search</Title>
@@ -63,6 +70,13 @@ const RepositoriesList = (): JSX.Element => {
         setSortParams={(field: string, sort: string) => {
           setSortParamsHandler(field, sort);
         }}
+      />
+      <Pagination
+        totalRecords={count}
+        setParams={(page: number) => {
+          setRequestParams(page);
+        }}
+        page={page}
       />
     </Wrapper>
   );

@@ -10,8 +10,9 @@ export const NoDataTd = styled.td`
   box-shadow: 0px 3px 6px #00000029;
   padding: 0px 2rem;
   background-color: var(--theme-white);
-  height: 75px;
+  height: 50px;
   border-radius: 0.5rem;
+  width: 100%;
 `;
 
 export const MainTable = styled.table`
