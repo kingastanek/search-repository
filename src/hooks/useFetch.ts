@@ -25,7 +25,7 @@ const useFetch = (fetchMethod: Function) => {
         setData(results);
         setCount(count);
       } catch (error) {
-        setErrors(error)
+        setErrors(error?.response?.data?.message || 'Something went wrong. Try again');
       } finally {
         setLoading(false);
       }
