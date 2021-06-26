@@ -10,7 +10,7 @@ export const tableHead = [
     key: 'name',
   },
   {
-    sortable: true,
+    sortable: false,
     name: 'Owner',
     key: 'owner',
   },
@@ -20,7 +20,7 @@ export const tableHead = [
     key: 'stars',
   },
   {
-    sortable: true,
+    sortable: false,
     name: 'Created at',
     key: 'createdAt',
   },

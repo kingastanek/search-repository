@@ -8,22 +8,13 @@ import {
   tRepositoriesData,
 } from 'types/Search';
 
-const transformSortFieldName = (fieldName: string) => {
-  switch (fieldName) {
-    case 'createdAt':
-      return 'created_at';
-    default:
-      return fieldName;
-  }
-};
-
 const searchRepositories = async ({ q, page, sort }: tSearchParams) => {
   let params: tSearchParamsAPI = { q: '', per_page: 10, page: 0 };
   if (q) params.q = q;
   if (page) params.page = page;
   if (sort?.fieldName && sort?.order) {
     params.order = sort.order;
-    params.sort = transformSortFieldName(sort.fieldName);
+    params.sort = sort.fieldName;
   }
 
   const result: AxiosResponse = await repositoriesAgent.searchRepositories(
