@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon should render big size correctly 1`] = `ShallowWrapper {}`;
+
+exports[`Icon should render large size correctly 1`] = `ShallowWrapper {}`;
+
+exports[`Icon should render medium size correctly 1`] = `ShallowWrapper {}`;
+
+exports[`Icon should render red color fill correctly 1`] = `ShallowWrapper {}`;
+
+exports[`Icon should render small size correctly 1`] = `ShallowWrapper {}`;
