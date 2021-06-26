@@ -17,7 +17,7 @@ export type tRepositoriesData = {
 export type tSearchParam = {
   q: string;
   per_page: number;
-  page: number;
+  page?: number;
   sort?: string;
   order?: string;
 };

@@ -7,12 +7,23 @@ import {
   tRepositoriesData,
 } from 'types/Search';
 
-const searchRepositories = async ({ q, page, sort, order }) => {
-  let params: tSearchParam = { q: '', per_page: 10, page: 1 };
+const transformSortFieldName = (fieldName: string) => {
+  switch (fieldName) {
+    case 'createdAt':
+      return 'created_at';
+    default:
+      return fieldName;
+  }
+};
+
+const searchRepositories = async ({ q, page, sort }) => {
+  let params: tSearchParam = { q: '', per_page: 10, page: 0 };
   if (q) params.q = q;
   if (page) params.page = page;
-  // if (sort) params.sort = sort;
-  if (order) params.order = order;
+  if (sort?.fieldName && sort?.order) {
+    params.order = sort.order;
+    params.sort = transformSortFieldName(sort.fieldName);
+  }
 
   const result: AxiosResponse = await repositoriesAgent.searchRepositories(
     params
@@ -45,7 +56,7 @@ const searchRepositories = async ({ q, page, sort, order }) => {
 
   return { data: { count: total_count, results: mappedData } };
 };
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   searchRepositories,
 };

@@ -6,11 +6,10 @@ const Helper = () => {
   const [page, setPage] = useState<number>(0);
   return (
     <Pagination
-      setParams={(newPage: number) => {
+      setPageParams={(newPage: number) => {
         if (newPage !== page) setPage(newPage);
       }}
       totalRecords={123}
-      page={1}
     />
   );
 };

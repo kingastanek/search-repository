@@ -1,84 +1,91 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Search, Table, Pagination, Spinner } from 'components';
+import { Table, Spinner, Notification } from 'components';
 import { useFetch, useDebounce } from 'hooks';
+import { tSortParams } from 'types/Table';
 import repositoriesService from 'services/repositories';
 import { tableHead } from './TableConfig';
 import { Wrapper, Title, Subtitle } from './RepositoriesList.style';
 
-type tSortParams = {
-  field: string;
-  order: string;
-};
-
 const RepositoriesList = (): JSX.Element => {
+  const [errors, setErrors] = useState<string>('');
   const [page, setPage] = useState<number>(0);
   const [sortParams, setSortParams] = useState<tSortParams>({
-    field: '',
+    fieldName: '',
     order: 'asc',
   });
 
-  const [setParamsHandler, loading, data, count] = useFetch(
+  const [setParamsHandler, loading, data, count, APIErrors] = useFetch(
     repositoriesService.searchRepositories
   );
   const [searchValue, setSearchValue] = useState<string>('');
-  const debouncedSearchTerm = useDebounce(searchValue, 1000);
+  const debouncedSearchTerm = useDebounce(searchValue);
 
-  const fetchData = useCallback(
-    () =>
+  useEffect(() => {
+    setErrors(APIErrors);
+  }, [APIErrors]);
+
+  const fetchData = useCallback(() => {
+    if (debouncedSearchTerm) {
       setParamsHandler({
         q: debouncedSearchTerm,
         page,
         sort: sortParams,
-      }),
-    [setParamsHandler, debouncedSearchTerm, page, sortParams]
-  );
+      });
+    }
+  }, [setParamsHandler, page, sortParams, debouncedSearchTerm]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
 
-  useEffect(() => {
-    if (!!debouncedSearchTerm) fetchData();
-  }, [debouncedSearchTerm, fetchData]);
-
-  const setSortParamsHandler = (field: string, order: string) => {
-    setSortParams({ field, order });
+  const setSortParamsHandler = (fieldName: string, order: string) => {
+    setSortParams({ fieldName, order });
   };
 
-  const setRequestParams = useCallback(
+  const setPageParams = useCallback(
     (newPage: number) => {
       if (newPage !== page) setPage(newPage);
     },
     [page]
   );
 
+  console.log(`sortParams`, sortParams);
+
   return (
-    <Wrapper>
-      <Title>Repository search</Title>
-      <Subtitle>
-        Type to search. Only the first 1000 search results are available!
-      </Subtitle>
-      <Search
-        name='repositories'
-        value={searchValue}
-        onChange={handleSearchChange}
-      />
-      {loading && <Spinner />}
-      <Table
-        tableBodyData={data}
-        tableHead={tableHead}
-        setSortParams={(field: string, sort: string) => {
-          setSortParamsHandler(field, sort);
-        }}
-      />
-      <Pagination
-        totalRecords={count}
-        setParams={(page: number) => {
-          setRequestParams(page);
-        }}
-        page={page}
-      />
-    </Wrapper>
+    <>
+      {!!errors && (
+        <Notification
+          key={errors}
+          message={errors}
+          show
+          customClose
+          closeNotification={() => setErrors('')}
+        />
+      )}
+      <Wrapper>
+        <Title>Repository search</Title>
+        <Subtitle>
+          Type to search. Only the first 1000 search results are available!
+        </Subtitle>
+
+        {loading && <Spinner />}
+        <Table
+          tableBodyData={data}
+          tableHead={tableHead}
+          setSortParams={(fieldName, order) => {
+            setSortParamsHandler(fieldName, order);
+          }}
+          setPageParams={(page: number) => setPageParams(page)}
+          totalRecords={count}
+          searchValue={searchValue}
+          handleSearchChange={handleSearchChange}
+        />
+      </Wrapper>
+    </>
   );
 };
 

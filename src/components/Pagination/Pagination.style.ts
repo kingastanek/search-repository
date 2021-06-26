@@ -20,7 +20,7 @@ export const PaginationContainer = styled.div`
       border: 1px solid grey;
       border-radius: 0.5rem;
       &:hover:not(.active) {
-        border: 1px solid var(--theme-main-green);
+        border: 1px solid var(--theme-green);
       }
       &.next {
         margin-right: 0;
@@ -39,7 +39,7 @@ export const PaginationContainer = styled.div`
         }
       }
       &.active {
-        background: var(--theme-main-green);
+        background: var(--theme-green);
         border-radius: 0.5rem;
         a {
           color: white;

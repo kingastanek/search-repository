@@ -1,29 +1,21 @@
-import React, { useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import Icon from 'components/Icon';
 import { PaginationContainer, Pages, Wrapper } from './Pagination.style';
 
 type tPagination = {
   totalRecords: number;
-  setParams: Function;
-  page?: number;
+  setPageParams: (page: number) => void;
 };
 
 const Pagination = ({
   totalRecords,
-  setParams,
-  page = 0,
+  setPageParams,
 }: tPagination): JSX.Element => {
   const limitPerPage = 10;
   const pageCountHelper: number = Math.ceil(totalRecords / limitPerPage);
 
-  useEffect(() => {
-    const pageNumber: number = Math.ceil(page / limitPerPage);
-    setParams(pageNumber, limitPerPage);
-  }, [page, setParams]);
-
   const handlePageClick = (data: { selected: number }) => {
-    setParams(data.selected, limitPerPage);
+    setPageParams(data.selected);
   };
 
   return (
