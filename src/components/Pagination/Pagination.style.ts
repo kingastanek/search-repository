@@ -73,6 +73,7 @@ export const Pages = styled.div`
 `;
 
 export const Wrapper = styled.footer`
+  overflow: scroll;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 0.5rem;
   position: fixed;

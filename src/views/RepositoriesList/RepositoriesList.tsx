@@ -7,6 +7,7 @@ import { tableHead } from './TableConfig';
 import { Wrapper, Title, Subtitle } from './RepositoriesList.style';
 
 const RepositoriesList = (): JSX.Element => {
+  const searchValueLS = localStorage.getItem('searchValue');
   const [errors, setErrors] = useState<string>('');
   const [page, setPage] = useState<number>(0);
   const [sortParams, setSortParams] = useState<tSortParams>({
@@ -17,7 +18,7 @@ const RepositoriesList = (): JSX.Element => {
   const [setParamsHandler, loading, data, count, APIErrors] = useFetch(
     repositoriesService.searchRepositories
   );
-  const [searchValue, setSearchValue] = useState<string>('');
+  const [searchValue, setSearchValue] = useState<string>(searchValueLS || '');
   const debouncedSearchTerm = useDebounce(searchValue);
 
   useEffect(() => {
@@ -39,7 +40,9 @@ const RepositoriesList = (): JSX.Element => {
   }, [fetchData]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
+    const { value } = event.target;
+    localStorage.setItem('searchValue', value);
+    setSearchValue(value);
   };
 
   const setSortParamsHandler = (fieldName: string, order: string) => {
@@ -68,7 +71,7 @@ const RepositoriesList = (): JSX.Element => {
       <Wrapper>
         <Title>Repository search</Title>
         <Subtitle>
-          Type to search. Only the first 1000 search results are available!
+          Type to search. Only the first 1000 pages are available!
         </Subtitle>
         <Table
           tableBodyData={data}
