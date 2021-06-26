@@ -1,8 +1,8 @@
 import fetchProvider from 'utils/axios';
-import { tSearchParam } from 'types/Search';
+import { tSearchParamsAPI } from 'types/Search';
 
 const repositories = {
-  searchRepositories: (params: tSearchParam) =>
+  searchRepositories: (params: tSearchParamsAPI) =>
     fetchProvider.get('search/repositories', { params }),
 };
 

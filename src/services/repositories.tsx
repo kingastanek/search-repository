@@ -3,7 +3,8 @@ import { formatDate } from 'utils/dateManager';
 import repositoriesAgent from 'agents/repositories';
 import {
   tRepositoriesItemAPI,
-  tSearchParam,
+  tSearchParams,
+  tSearchParamsAPI,
   tRepositoriesData,
 } from 'types/Search';
 
@@ -16,8 +17,8 @@ const transformSortFieldName = (fieldName: string) => {
   }
 };
 
-const searchRepositories = async ({ q, page, sort }) => {
-  let params: tSearchParam = { q: '', per_page: 10, page: 0 };
+const searchRepositories = async ({ q, page, sort }: tSearchParams) => {
+  let params: tSearchParamsAPI = { q: '', per_page: 10, page: 0 };
   if (q) params.q = q;
   if (page) params.page = page;
   if (sort?.fieldName && sort?.order) {

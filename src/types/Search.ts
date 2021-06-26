@@ -14,7 +14,17 @@ export type tRepositoriesData = {
   createdAt: Date;
 };
 
-export type tSearchParam = {
+export type tSearchParams = {
+  q: string;
+  per_page: number;
+  page?: number;
+  sort?: {
+    fieldName: string;
+    order: string;
+  };
+};
+
+export type tSearchParamsAPI = {
   q: string;
   per_page: number;
   page?: number;

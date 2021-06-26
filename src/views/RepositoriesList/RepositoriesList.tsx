@@ -53,8 +53,6 @@ const RepositoriesList = (): JSX.Element => {
     [page]
   );
 
-  console.log(`sortParams`, sortParams);
-
   return (
     <>
       {!!errors && (
@@ -66,13 +64,12 @@ const RepositoriesList = (): JSX.Element => {
           closeNotification={() => setErrors('')}
         />
       )}
+      {!!loading && <Spinner />}
       <Wrapper>
         <Title>Repository search</Title>
         <Subtitle>
           Type to search. Only the first 1000 search results are available!
         </Subtitle>
-
-        {loading && <Spinner />}
         <Table
           tableBodyData={data}
           tableHead={tableHead}
